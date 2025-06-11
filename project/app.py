@@ -104,9 +104,9 @@ def load_models():
 #         with open(app_data_path, 'rb') as f:
 #             app_data = pickle.load(f)
 #         return models, app_data
-    except FileNotFoundError:
-        st.error("❌ Models not found! Please upload model files")
-        return None, None
+    # except FileNotFoundError:
+    #     st.error("❌ Models not found! Please upload model files")
+    #     return None, None
 
 def main():
     # Header
