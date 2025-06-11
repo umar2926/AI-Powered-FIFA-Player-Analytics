@@ -58,9 +58,12 @@ def load_data():
 def load_models():
     """Load trained models"""
     try:
-        with open('/project/models/trained_models.pkl', 'rb') as f:
+        models_path = os.path.join('models', 'trained_models.pkl')
+        app_data_path = os.path.join('models', 'app_data.pkl')
+        
+        with open(models_path, 'rb') as f:
             models = pickle.load(f)
-        with open('/models/app_data.pkl', 'rb') as f:
+        with open(app_data_path, 'rb') as f:
             app_data = pickle.load(f)
         return models, app_data
     except FileNotFoundError:
