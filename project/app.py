@@ -58,7 +58,6 @@ def load_data():
 def load_models():
     """Load trained models"""
     try:
-       try:
         with open('project/models/trained_models.pkl', 'rb') as f:
             models = pickle.load(f)
         with open('project/models/app_data.pkl', 'rb') as f:
