@@ -53,19 +53,57 @@ def load_data():
     except FileNotFoundError:
         st.error("❌ Dataset not found! Please upload fifa_sample_data.csv")
         return None
+import os
+import pickle
+import streamlit as st
 
-@st.cache_resource
 def load_models():
     """Load trained models"""
+    # Debug: Check current directory and files
+    st.write("🔍 **Debugging file paths:**")
+    st.write(f"Current working directory: {os.getcwd()}")
+    st.write(f"Files in current directory: {os.listdir('.')}")
+    
+    # Check if models folder exists
+    if os.path.exists('models'):
+        st.write(f"✅ Models folder found!")
+        st.write(f"Files in models folder: {os.listdir('models')}")
+    else:
+        st.write("❌ Models folder not found!")
+        st.write("Available folders:", [d for d in os.listdir('.') if os.path.isdir(d)])
+    
+    # Check specific files
+    files_to_check = ['models/trained_models.pkl', 'models/app_data.pkl']
+    for file_path in files_to_check:
+        if os.path.exists(file_path):
+            st.write(f"✅ Found: {file_path}")
+        else:
+            st.write(f"❌ Missing: {file_path}")
+    
     try:
-        models_path = os.path.join('models', 'trained_models.pkl')
-        app_data_path = os.path.join('models', 'app_data.pkl')
-        
-        with open(models_path, 'rb') as f:
+        with open('models/trained_models.pkl', 'rb') as f:
             models = pickle.load(f)
-        with open(app_data_path, 'rb') as f:
+        with open('models/app_data.pkl', 'rb') as f:
             app_data = pickle.load(f)
         return models, app_data
+    except FileNotFoundError as e:
+        st.error(f"❌ FileNotFoundError: {e}")
+        return None, None
+    except Exception as e:
+        st.error(f"❌ Other error: {e}")
+        return None, None
+# @st.cache_resource
+# def load_models():
+#     """Load trained models"""
+#     try:
+#         models_path = os.path.join('models', 'trained_models.pkl')
+#         app_data_path = os.path.join('models', 'app_data.pkl')
+        
+#         with open(models_path, 'rb') as f:
+#             models = pickle.load(f)
+#         with open(app_data_path, 'rb') as f:
+#             app_data = pickle.load(f)
+#         return models, app_data
     except FileNotFoundError:
         st.error("❌ Models not found! Please upload model files")
         return None, None
