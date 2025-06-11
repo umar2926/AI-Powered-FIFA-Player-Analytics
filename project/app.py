@@ -187,8 +187,7 @@ def question_2_analysis(df):
     
     with col2:
         if 'value_euro' in df.columns:
-            fig = px.scatter(filtered_df, x='age', y='value_euro', 
-                            title='Age vs Market Value', trendline='ols')
+            fig = px.scatter(filtered_df, x='age', y='value_euro', title='Age vs Market Value')
             st.plotly_chart(fig, use_container_width=True)
 
 def question_3_analysis(df):
