@@ -182,8 +182,7 @@ def question_2_analysis(df):
     col1, col2 = st.columns(2)
     
     with col1:
-        fig = px.scatter(filtered_df, x='age', y='overall_rating', 
-                        title='Age vs Overall Rating', trendline='ols')
+        fig = px.scatter(filtered_df, x='age', y='overall_rating', title='Age vs Overall Rating')
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
